@@ -45,4 +45,15 @@ typedef	struct		s_file
 }					t_file;
 
 void			read_ants(t_file **file, t_l **map);
+void			add_to_file(t_file **file, char *str);
+int				add_to_rooms(char **split, char sf, t_room **rooms);
+int				add_first_room(char **split, char sf, t_room **rooms);
+int				check_max_int(char **holder);
+int				check_room(char **holder);
+int				ft_check_num(char *str);
+int				array_size(char **str);
+void			free_split(char **split);
+void			create_matrix(t_l **map);
+int				ft_count_rooms(t_room *room);
+int				add_to_links(t_l *map, t_room *rooms, char **split);
 #endif

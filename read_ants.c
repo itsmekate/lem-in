@@ -51,11 +51,9 @@ static	t_file	*write_ant(t_file **file, t_l **map)
 		if (validate_ants(&(*map), tmp) == 0)
 		{
 			ft_putstr("ERROR\n");
-			ft_putstr("WRONG NUMBER OF ANTS\n");
+			// ft_putstr("WRONG NUMBER OF ANTS\n");
 			free(*map);
-			free(map);
 			free(*file);
-			free(file);
 			exit(0);
 		}
 		else
