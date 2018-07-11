@@ -75,12 +75,12 @@ t_file	*ft_find_path(t_l *map, t_room *head)
 			return (NULL);
 		i++;
 	}
-	while (paths)
-	{
-		ft_putstr(paths->str);
-		ft_putendl("-");
-		paths = paths->next;
-	}
+	// while (paths)
+	// {
+	// 	ft_putstr(paths->str);
+	// 	ft_putendl("-");
+	// 	paths = paths->next;
+	// }
 	return (paths);
 }
 

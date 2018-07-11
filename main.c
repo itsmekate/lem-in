@@ -25,7 +25,6 @@ void	add_to_file(t_file **file, char *str)
 	tmp->next = (t_file*)malloc(sizeof(t_file));
 	tmp->next->str = ft_strdup(str);
 	tmp->next->next = NULL;
-	// ft_putendl("ADDED");
 }
 
 void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
@@ -57,7 +56,7 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 			{
 				/*FREE MAP, FILE, ROOMS*/
 				// ft_putendl("EXIT3");
-				ft_putendl("ERROR1");
+				ft_putendl("ERROR");
 				exit(0);
 			}
 			if (!check_sf_and_names(rooms, sf, split))
@@ -79,6 +78,20 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 		else if (ft_strchr(tmp, '-'))
 		{
 			split = ft_strsplit(tmp, '-');
+			if (ft_strchr(split[0], ' ') || ft_strchr(split[1], ' '))
+			{
+				/*FREE MAP, FILE, ROOMS*/
+				// ft_putendl("EXIT3");
+				ft_putendl("ERROR");
+				exit(0);
+			}
+			if (array_size(split) != 2)
+			{
+				/*FREE MAP, FILE, ROOMS*/
+				// ft_putendl("EXIT3");
+				ft_putendl("ERROR");
+				exit(0);
+			}
 			add_to_file(file, tmp);
 			if (f == 0)
 			{
