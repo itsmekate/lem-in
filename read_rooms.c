@@ -1,5 +1,30 @@
 #include "lemin.h"
 
+int		check_sf_and_names(t_room **rooms, char sf, char **split)
+{
+	t_room *temp;
+
+	temp = *rooms;
+	while (temp)
+	{
+		if (ft_strcmp(temp->name, split[0]) == 0)
+		{
+			ft_putendl("ERROR");
+			// ft_putendl("NAME ALREADY EXCISTS");
+			return (0);
+		}
+		if ((temp->start == 1 && sf == 's') 
+			|| (temp->finish == 1 && sf == 'f'))
+		{
+			ft_putendl("ERROR");
+			// ft_putendl("WRONG NUM OF COMMANDS");
+			return (0);
+		}
+		temp = temp->next;
+	}
+	return (1);
+}
+
 void	free_split(char **split)
 {
 	int k;
@@ -28,17 +53,6 @@ int	add_to_rooms(char **split, char sf, t_room **rooms)
 	while (tmp->next)
 	{
 		tmp = tmp->next;
-		if (ft_strcmp(tmp->name, split[0]) == 0)
-		{
-			ft_putendl("ERROR");
-			return (0);
-		}
-		// if ((tmp->start == 1 && sf == 's') 
-		// 	|| (tmp->finish == 1 && sf == 'f'))
-		// {
-		// 	ft_putendl("ERROR");
-		// 	return (0);
-		// }
 	}
 	tmp->next = (t_room*)malloc(sizeof(t_room));
 	tmp->next->name = ft_strdup(split[0]);

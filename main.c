@@ -27,14 +27,31 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 	{
 		(ft_strcmp(tmp, "##start") == 0) ? sf = 's' : 0;
 		(ft_strcmp(tmp, "##end") == 0) ? sf = 'f' : 0;
-		if (tmp[0] == '#')
+		if (sf)
+		{
+			if (!(get_next_line(0, &tmp)))
+			{
+				/*FREE MAP, FILE, ROOMS*/
+				exit(0);
+			}
+		}
+		if (tmp[0] == '#' && !sf)
 			add_to_file(file, tmp);
 		else if ((split = ft_strsplit(tmp, ' ')) && f == 1)
 		{
+			if (!check_sf_and_names(rooms, sf, split))
+			{
+				/*FREE MAP, FILE, ROOMS*/
+				// ft_putendl("EXIT5");
+				exit(0);
+			}
 			add_to_file(file, tmp);
 			if (!add_first_room(split, sf, rooms))
+			{
 				/*FREE MAP, FILE, ROOMS*/
+				// ft_putendl("EXIT6");
 				exit(0);
+			}
 			f = 0;
 			free_split(split);
 		}
@@ -51,17 +68,23 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 			else if (!(add_to_links(*map, *rooms, split)))
 			{
 				/*FREE MAP, FILE, ROOMS*/
-				// ft_putendl("EXIT");
+				// ft_putendl("EXIT4");
 				exit(0);
 			}
 			free_split(split);
 		}
 		else if ((split = ft_strsplit(tmp, ' ')))
 		{
+			if (!check_sf_and_names(rooms, sf, split))
+			{
+				/*FREE MAP, FILE, ROOMS*/
+				// ft_putendl("EXIT3");
+				exit(0);
+			}
 			add_to_file(file, tmp);
 			if(!add_to_rooms(split, sf, rooms)){
 				/*FREE MAP, FILE, ROOMS*/
-				// ft_putendl("EXIT");
+				// ft_putendl("EXIT2");
 				exit(0);
 			}
 			free_split(split);
@@ -89,6 +112,13 @@ int		main(void)
 	// head = file;
 	read_ants(&file, &map);
 	read_rooms_and_links(&file, &map, &rooms);
+	if (!read_start_and_end(&rooms, &map))
+	{
+		/*FREE MAP, FILE, ROOMS*/
+		// ft_putendl("EXIT1");
+		exit(0);
+	}
+	// ft_putendl("END");
 	// while (rooms)
 	// {
 	// 	ft_putendl(rooms->name);

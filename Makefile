@@ -13,7 +13,9 @@
 NAME = lem-in
 
 SRCS = main.c libft/libft.a read_ants.c \
-read_rooms.c read_links.c validation.c
+read_rooms.c read_links.c validation.c \
+read_start_and_end.c
+
 LIB = -L libft/ -lft
 OBJ = $(SRCS:.c=.o)
 

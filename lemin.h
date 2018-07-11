@@ -56,4 +56,7 @@ void			free_split(char **split);
 void			create_matrix(t_l **map);
 int				ft_count_rooms(t_room *room);
 int				add_to_links(t_l *map, t_room *rooms, char **split);
+int				check_sf_and_names(t_room **rooms, char sf, char **split);
+int				read_start_and_end(t_room **rooms, t_l **map);
+
 #endif
