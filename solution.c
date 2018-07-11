@@ -6,7 +6,7 @@
 /*   By: kprasol <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 18:08:52 by kprasol           #+#    #+#             */
-/*   Updated: 2018/05/23 18:08:58 by kprasol          ###   ########.fr       */
+/*   Updated: 2018/07/11 17:30:23 by kprasol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,18 @@ t_file	*ft_find_path(t_l *map, t_room *head)
 			push_node_paths(paths, ft_room_name(head, rc.row));
 		rc = ft_more_find_path(rc, map);
 		if (rc.row == rc.min_col)
+		{
+			// ft_putstr("H");
 			return (NULL);
+		}
 		i++;
 	}
-	// while (paths)
-	// {
-	// 	ft_putstr(paths->str);
-	// 	ft_putendl("-");
-	// 	paths = paths->next;
-	// }
+	// ft_putstr("GOT HERE");
+	while (paths)
+	{
+		ft_putendl(paths->str);
+		paths = paths->next;
+	}
 	return (paths);
 }
 

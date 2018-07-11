@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_start_and_end.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kprasol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/11 17:30:14 by kprasol           #+#    #+#             */
+/*   Updated: 2018/07/11 17:30:15 by kprasol          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 int	read_start_and_end(t_room **rooms, t_l **map)
@@ -24,7 +36,7 @@ int	read_start_and_end(t_room **rooms, t_l **map)
 	return (1);
 }
 
-int		ft_count_rooms(t_room *room)
+int	ft_count_rooms(t_room *room)
 {
 	int count;
 

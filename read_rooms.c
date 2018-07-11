@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_rooms.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kprasol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/11 17:30:02 by kprasol           #+#    #+#             */
+/*   Updated: 2018/07/11 17:30:03 by kprasol          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 int		check_sf_and_names(t_room **rooms, char sf, char **split)
 {
-	t_room *temp;
-	int x;
-	int y;
+	t_room	*temp;
+	int		x;
+	int		y;
 
 	temp = *rooms;
 	x = ft_atoi(split[1]);
@@ -13,7 +25,7 @@ int		check_sf_and_names(t_room **rooms, char sf, char **split)
 	{
 		if ((ft_strcmp(temp->name, split[0]) == 0) ||
 			(temp->x == x && temp->y == y) ||
-			(temp->start == 1 && sf == 's') 
+			(temp->start == 1 && sf == 's')
 			|| (temp->finish == 1 && sf == 'f'))
 		{
 			ft_putendl("ERROR");
@@ -38,7 +50,7 @@ void	free_split(char **split)
 	free(split);
 }
 
-int	add_to_rooms(char **split, char sf, t_room **rooms)
+int		add_to_rooms(char **split, char sf, t_room **rooms)
 {
 	t_room *tmp;
 
@@ -67,7 +79,7 @@ int	add_to_rooms(char **split, char sf, t_room **rooms)
 	return (1);
 }
 
-int	add_first_room(char **split, char sf, t_room **rooms)
+int		add_first_room(char **split, char sf, t_room **rooms)
 {
 	if (!check_max_int(split) || !check_room(split))
 	{

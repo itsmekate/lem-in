@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kprasol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/11 17:29:28 by kprasol           #+#    #+#             */
+/*   Updated: 2018/07/11 17:29:29 by kprasol          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 void	print_lemin(t_file *file)
@@ -149,7 +161,6 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 int		main(void)
 {
 	t_file	*file;
-	// t_file	*head;
 	t_l		*map;
 	t_room	*rooms;
 	t_file	*res;
@@ -158,13 +169,11 @@ int		main(void)
 	file = NULL;
 	map = NULL;
 	rooms = NULL;
-	// head = file;
 	read_ants(&file, &map);
 	read_rooms_and_links(&file, &map, &rooms);
 	if (!read_start_and_end(&rooms, &map))
 	{
 		/*FREE MAP, FILE, ROOMS*/
-		// ft_putendl("EXIT1");
 		exit(0);
 	}
 	map->rooms = ft_count_rooms(rooms);
@@ -177,15 +186,4 @@ int		main(void)
 	}
 	print_lemin(file);
 	print_out(map, res);
-	// ft_putendl("END");
-	// while (rooms)
-	// {
-	// 	ft_putendl(rooms->name);
-	// 	rooms = rooms->next;
-	// }
-	// while (file)
-	// {
-	// 	ft_putendl(file->str);
-	// 	file = file->next;
-	// }
 }
