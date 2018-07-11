@@ -1,19 +1,17 @@
 #include "lemin.h"
 
-int		ft_count_rooms(t_room *room)
+char	*ft_room_name(t_room *room, int id)
 {
-	int count;
-
-	count = 0;
 	while (room)
 	{
-		count++;
+		if (room->num == id)
+			return (room->name);
 		room = room->next;
 	}
-	return (count);
+	return (0);
 }
 
-static int		ft_room_id(t_room *room, char *str)
+int		ft_room_id(t_room *room, char *str)
 {
 	while (room)
 	{

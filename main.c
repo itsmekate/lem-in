@@ -1,5 +1,18 @@
 #include "lemin.h"
 
+void	print_lemin(t_file *file)
+{
+	t_file	*go;
+
+	go = file;
+	while (go->next)
+	{
+		ft_putendl(go->str);
+		go = go->next;
+	}
+	ft_putendl("");
+}
+
 void	add_to_file(t_file **file, char *str)
 {
 	t_file		*tmp;
@@ -29,6 +42,7 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 		(ft_strcmp(tmp, "##end") == 0) ? sf = 'f' : 0;
 		if (sf)
 		{
+			add_to_file(file, tmp);
 			if (!(get_next_line(0, &tmp)))
 			{
 				/*FREE MAP, FILE, ROOMS*/
@@ -39,6 +53,13 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 			add_to_file(file, tmp);
 		else if ((split = ft_strsplit(tmp, ' ')) && f == 1)
 		{
+			if (array_size(split) != 3)
+			{
+				/*FREE MAP, FILE, ROOMS*/
+				// ft_putendl("EXIT3");
+				ft_putendl("ERROR1");
+				exit(0);
+			}
 			if (!check_sf_and_names(rooms, sf, split))
 			{
 				/*FREE MAP, FILE, ROOMS*/
@@ -75,6 +96,13 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 		}
 		else if ((split = ft_strsplit(tmp, ' ')))
 		{
+			if (array_size(split) != 3)
+			{
+				/*FREE MAP, FILE, ROOMS*/
+				// ft_putendl("EXIT3");
+				ft_putendl("ERROR");
+				exit(0);
+			}
 			if (!check_sf_and_names(rooms, sf, split))
 			{
 				/*FREE MAP, FILE, ROOMS*/
@@ -97,6 +125,12 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 		sf = 0;
 		free(tmp);
 	}
+	if (f != 2)
+	{
+	/*FREE MAP, FILE, ROOMS*/
+		ft_putendl("ERROR");
+		exit(0);
+	}
 }
 
 int		main(void)
@@ -105,6 +139,8 @@ int		main(void)
 	// t_file	*head;
 	t_l		*map;
 	t_room	*rooms;
+	t_file	*res;
+
 
 	file = NULL;
 	map = NULL;
@@ -118,6 +154,16 @@ int		main(void)
 		// ft_putendl("EXIT1");
 		exit(0);
 	}
+	map->rooms = ft_count_rooms(rooms);
+	ft_set_levels(map, 2, map->start);
+	res = ft_find_path(map, rooms);
+	if (res == NULL)
+	{
+		ft_putstr("ERROR\n");
+		return (0);
+	}
+	print_lemin(file);
+	print_out(map, res);
 	// ft_putendl("END");
 	// while (rooms)
 	// {

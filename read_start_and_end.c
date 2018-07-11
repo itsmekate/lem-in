@@ -23,3 +23,16 @@ int	read_start_and_end(t_room **rooms, t_l **map)
 	}
 	return (1);
 }
+
+int		ft_count_rooms(t_room *room)
+{
+	int count;
+
+	count = 0;
+	while (room)
+	{
+		count++;
+		room = room->next;
+	}
+	return (count);
+}
