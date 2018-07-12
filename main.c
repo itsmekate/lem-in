@@ -18,7 +18,7 @@ void	print_lemin(t_file *file)
 	t_file	*go;
 
 	go = file;
-	while (go->next)
+	while (go)
 	{
 		ft_putendl(go->str);
 		go = go->next;
@@ -63,19 +63,26 @@ void	read_rooms_and_links(t_all *all)
 	f = 1;
 	while (get_next_line(0, &tmp))
 	{
+		// ft_putstr("---------");
 		if ((sf = set_sf(sf, tmp)))
 		{
+			// ft_putstr("1");
 			add_to_file(&all->file, tmp);
 			if (!(get_next_line(0, &tmp)))
 			{
+				// ft_putstr("2");
 				/*FREE MAP, FILE, ROOMS*/
 				exit(0);
 			}
 		}
 		if (tmp[0] == '#' && !sf)
+		{
+			// ft_putstr("3");
 			add_to_file(&all->file, tmp);
+		}
 		else if ((split = ft_strsplit(tmp, ' ')) && f == 1)
 		{
+			// ft_putstr("4");
 			validate_rooms(split, &all->rooms, sf);
 			add_to_file(&all->file, tmp);
 			if (!add_first_room(split, sf, &all->rooms))
@@ -89,25 +96,30 @@ void	read_rooms_and_links(t_all *all)
 		}
 		else if (ft_strchr(tmp, '-'))
 		{
+			// ft_putstr("5");
 			split = ft_strsplit(tmp, '-');
-			validate_links(split/*, file, rooms, map*/);
+			validate_links(split/*, all*/);
 			add_to_file(&all->file, tmp);
 			if (f == 0)
 			{
+				// ft_putstr("7");
 				all->map->rooms = ft_count_rooms(all->rooms);
 				create_matrix(&all->map);
 				f = 2;
 			}
 			else if (!(add_to_links(all->map, all->rooms, split)))
 			{
+				// ft_putstr("8");
 				/*FREE MAP, FILE, ROOMS*/
 				// ft_putendl("EXIT4");
 				exit(0);
 			}
+			// ft_putstr("9");
 			free_split(split);
 		}
 		else if ((split = ft_strsplit(tmp, ' ')))
 		{
+			// ft_putstr("6");
 			validate_rooms(split, &all->rooms, sf);
 			add_to_file(&all->file, tmp);
 			if(!add_to_rooms(split, sf, &all->rooms)){
@@ -123,6 +135,8 @@ void	read_rooms_and_links(t_all *all)
 			exit(0);
 		}
 		sf = 0;
+	// ft_putstr("---------");
+	// ft_putendl(tmp);
 		free(tmp);
 	}
 	if (f != 2)
@@ -138,7 +152,6 @@ int		main(void)
 	t_all	*all;
 	t_file	*res;
 
-	// open("test", O_RDONLY);
 	all = NULL;
 	set_all(&all);
 	read_ants(all);
