@@ -73,17 +73,15 @@ t_file	*ft_find_path(t_l *map, t_room *head)
 		rc = ft_more_find_path(rc, map);
 		if (rc.row == rc.min_col)
 		{
-			// ft_putstr("H");
 			return (NULL);
 		}
 		i++;
 	}
-	// ft_putstr("GOT HERE");
-	while (paths)
-	{
-		ft_putendl(paths->str);
-		paths = paths->next;
-	}
+	// while (paths)
+	// {
+	// 	ft_putendl(paths->str);
+	// 	paths = paths->next;
+	// }
 	return (paths);
 }
 

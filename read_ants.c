@@ -41,34 +41,32 @@ static	int		validate_ants(t_l **map, char *tmp)
 	return (1);
 }
 
-static	t_file	*write_ant(t_file **file, t_l **map)
+static void	write_ant(t_all *all)
 {
 	char	*tmp;
 
-	// *file = (t_file*)malloc(sizeof(t_file));
-	if (get_next_line(0, &tmp))
+	all->file = (t_file*)malloc(sizeof(t_file));
+	if (get_next_line(0, &tmp) > 0)
 	{
-		if (validate_ants(&(*map), tmp) == 0)
+		if (validate_ants(&all->map, tmp) == 0)
 		{
 			ft_putstr("ERROR\n");
 			// ft_putstr("WRONG NUMBER OF ANTS\n");
-			free(*map);
-			free(*file);
+			// free(*map);
+			// free(*file);
 			exit(0);
 		}
 		else
 		{
-			(*file)->str = ft_strdup(tmp);
+			all->file->str = ft_strdup(tmp);
 			free(tmp);
-			(*file)->next = NULL;
-			return (*file);
+			all->file->next = NULL;
 		}
 	}
-	return (0);
 }
 
-void			read_ants(t_file **file, t_l **map)
+void			read_ants(t_all *all)
 {
-	*map = (t_l*)malloc(sizeof(t_l));
-	*file = write_ant(&(*file), &(*map));
+	all->map = (t_l*)malloc(sizeof(t_l));
+	write_ant(all);
 }

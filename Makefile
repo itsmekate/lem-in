@@ -6,7 +6,7 @@
 #    By: kprasol <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/26 14:32:41 by kprasol           #+#    #+#              #
-#    Updated: 2017/11/16 19:30:19 by kprasol          ###   ########.fr        #
+#    Updated: 2018/07/12 19:58:47 by kprasol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,13 @@ NAME = lem-in
 
 SRCS = main.c libft/libft.a read_ants.c \
 read_rooms.c read_links.c validation.c \
-read_start_and_end.c print.c solution.c
+read_start_and_end.c print.c solution.c \
+validate.c
+
 LIB = -L libft/ -lft
 OBJ = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 # -fsanitize=address -g
 
