@@ -52,6 +52,13 @@ typedef	struct		s_coord
 	int				min_col;
 }					t_coord;
 
+typedef	struct 		s_all
+{
+	t_l				**map;
+	t_room			**rooms;
+	t_file			**file;
+}					t_all;
+
 void				read_ants(t_file **file, t_l **map);
 void				add_to_file(t_file **file, char *str);
 int					add_to_rooms(char **split, char sf, t_room **rooms);

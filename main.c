@@ -39,21 +39,73 @@ void	add_to_file(t_file **file, char *str)
 	tmp->next->next = NULL;
 }
 
-void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
+void	validate_rooms(char **split, t_room **rooms, char sf)
+{
+	if (array_size(split) != 3)
+	{
+		/*FREE MAP, FILE, ROOMS*/
+		// ft_putendl("EXIT3");
+		ft_putendl("ERROR");
+		exit(0);
+	}
+	if (!check_sf_and_names(rooms, sf, split))
+	{
+		/*FREE MAP, FILE, ROOMS*/
+		// ft_putendl("EXIT5");
+		exit(0);
+	}
+}
+
+void	validate_links(char **split/*, t_file **file, t_room **rooms, t_l **map*/)
+{
+	if (ft_strchr(split[0], ' ') || ft_strchr(split[1], ' '))
+	{
+		/*FREE MAP, FILE, ROOMS*/
+		// ft_putendl("EXIT3");
+		ft_putendl("ERROR");
+		exit(0);
+	}
+	if (array_size(split) != 2)
+	{
+		/*FREE MAP, FILE, ROOMS*/
+		// ft_putendl("EXIT3");
+		ft_putendl("ERROR");
+		exit(0);
+	}
+}
+
+char	set_sf(char sf, char *tmp)
+{
+	(ft_strcmp(tmp, "##start") == 0) ? sf = 's' : 0;
+	(ft_strcmp(tmp, "##end") == 0) ? sf = 'f' : 0;
+	return (sf);
+}
+
+void	set_all(t_all *all, t_room **rooms, t_l **map, t_file **file)
+{
+	all = (t_all*)malloc(sizeof(t_all));
+	*map = (t_l*)malloc(sizeof(t_l));
+	all->map = map;
+	*file = (t_file*)malloc(sizeof(t_file));
+	all->file = file;
+	all->rooms = rooms;	
+}
+
+void	read_rooms_and_links(t_all *all)
 {
 	char	*tmp;
 	char	sf;
 	int		f;
 	char	**split;
+	t_l 	**map;
 
+	map = all->map;
 	f = 1;
 	while (get_next_line(0, &tmp))
 	{
-		(ft_strcmp(tmp, "##start") == 0) ? sf = 's' : 0;
-		(ft_strcmp(tmp, "##end") == 0) ? sf = 'f' : 0;
-		if (sf)
+		if ((sf = set_sf(sf, tmp)))
 		{
-			add_to_file(file, tmp);
+			add_to_file(all->file, tmp);
 			if (!(get_next_line(0, &tmp)))
 			{
 				/*FREE MAP, FILE, ROOMS*/
@@ -61,24 +113,12 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 			}
 		}
 		if (tmp[0] == '#' && !sf)
-			add_to_file(file, tmp);
+			add_to_file(all->file, tmp);
 		else if ((split = ft_strsplit(tmp, ' ')) && f == 1)
 		{
-			if (array_size(split) != 3)
-			{
-				/*FREE MAP, FILE, ROOMS*/
-				// ft_putendl("EXIT3");
-				ft_putendl("ERROR");
-				exit(0);
-			}
-			if (!check_sf_and_names(rooms, sf, split))
-			{
-				/*FREE MAP, FILE, ROOMS*/
-				// ft_putendl("EXIT5");
-				exit(0);
-			}
-			add_to_file(file, tmp);
-			if (!add_first_room(split, sf, rooms))
+			validate_rooms(split, all->rooms, sf);
+			add_to_file(all->file, tmp);
+			if (!add_first_room(split, sf, all->rooms))
 			{
 				/*FREE MAP, FILE, ROOMS*/
 				// ft_putendl("EXIT6");
@@ -90,28 +130,15 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 		else if (ft_strchr(tmp, '-'))
 		{
 			split = ft_strsplit(tmp, '-');
-			if (ft_strchr(split[0], ' ') || ft_strchr(split[1], ' '))
-			{
-				/*FREE MAP, FILE, ROOMS*/
-				// ft_putendl("EXIT3");
-				ft_putendl("ERROR");
-				exit(0);
-			}
-			if (array_size(split) != 2)
-			{
-				/*FREE MAP, FILE, ROOMS*/
-				// ft_putendl("EXIT3");
-				ft_putendl("ERROR");
-				exit(0);
-			}
-			add_to_file(file, tmp);
+			validate_links(split/*, file, rooms, map*/);
+			add_to_file(all->file, tmp);
 			if (f == 0)
 			{
-				(*map)->rooms = ft_count_rooms(*rooms);
-				create_matrix(map);
+			(*map)->rooms = ft_count_rooms(*(all->rooms));
+				create_matrix(all->map);
 				f = 2;
 			}
-			else if (!(add_to_links(*map, *rooms, split)))
+			else if (!(add_to_links((*map), *(all->rooms), split)))
 			{
 				/*FREE MAP, FILE, ROOMS*/
 				// ft_putendl("EXIT4");
@@ -121,21 +148,9 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 		}
 		else if ((split = ft_strsplit(tmp, ' ')))
 		{
-			if (array_size(split) != 3)
-			{
-				/*FREE MAP, FILE, ROOMS*/
-				// ft_putendl("EXIT3");
-				ft_putendl("ERROR");
-				exit(0);
-			}
-			if (!check_sf_and_names(rooms, sf, split))
-			{
-				/*FREE MAP, FILE, ROOMS*/
-				// ft_putendl("EXIT3");
-				exit(0);
-			}
-			add_to_file(file, tmp);
-			if(!add_to_rooms(split, sf, rooms)){
+			validate_rooms(split, all->rooms, sf);
+			add_to_file(all->file, tmp);
+			if(!add_to_rooms(split, sf, all->rooms)){
 				/*FREE MAP, FILE, ROOMS*/
 				// ft_putendl("EXIT2");
 				exit(0);
@@ -160,6 +175,7 @@ void	read_rooms_and_links(t_file **file, t_l **map,t_room **rooms)
 
 int		main(void)
 {
+	t_all	*all;
 	t_file	*file;
 	t_l		*map;
 	t_room	*rooms;
@@ -169,8 +185,10 @@ int		main(void)
 	file = NULL;
 	map = NULL;
 	rooms = NULL;
+	all = NULL;
+	set_all(all, &rooms, &map, &file);
 	read_ants(&file, &map);
-	read_rooms_and_links(&file, &map, &rooms);
+	read_rooms_and_links(all);
 	if (!read_start_and_end(&rooms, &map))
 	{
 		/*FREE MAP, FILE, ROOMS*/
@@ -181,6 +199,7 @@ int		main(void)
 	res = ft_find_path(map, rooms);
 	if (res == NULL)
 	{
+		/*FREE RES*/
 		ft_putstr("ERROR\n");
 		return (0);
 	}

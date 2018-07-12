@@ -45,7 +45,7 @@ static	t_file	*write_ant(t_file **file, t_l **map)
 {
 	char	*tmp;
 
-	*file = (t_file*)malloc(sizeof(t_file));
+	// *file = (t_file*)malloc(sizeof(t_file));
 	if (get_next_line(0, &tmp))
 	{
 		if (validate_ants(&(*map), tmp) == 0)
