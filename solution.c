@@ -64,8 +64,8 @@ t_file	*ft_find_path(t_l *map, t_room *head)
 	paths = NULL;
 	while (rc.row != map->start)
 	{
-		ft_putnbr(rc.row);
-		ft_putstr("--------------");
+		// ft_putstr("--");
+		// ft_putnbr(rc.row);
 		rc.col = 0;
 		rc.row = rc.min_col;
 		if (paths == NULL)
@@ -79,13 +79,6 @@ t_file	*ft_find_path(t_l *map, t_room *head)
 		}
 		i++;
 	}
-	// ft_putstr("--------------");
-	// while (paths)
-	// {
-	// 	ft_putstr("--------------");
-	// 	ft_putendl(paths->str);
-	// 	paths = paths->next;
-	// }
 	return (paths);
 }
 

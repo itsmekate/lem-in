@@ -41,7 +41,7 @@ static	int		validate_ants(t_l **map, char *tmp)
 	return (1);
 }
 
-static void	write_ant(t_all *all)
+static void		write_ant(t_all *all)
 {
 	char	*tmp;
 

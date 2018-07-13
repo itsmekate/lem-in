@@ -29,7 +29,6 @@ int	read_start_and_end(t_room **rooms, t_l **map)
 	}
 	if ((*map)->start == -1 || (*map)->end == -1)
 	{
-		ft_putendl("ERROR");
 		// ft_putendl("WRONG NUM OF CMD");
 		return (0);
 	}
