@@ -37,7 +37,9 @@ static	int		validate_ants(t_l **map, char *tmp)
 	else
 		(*map)->ants = 0;
 	if ((*map)->ants <= 0)
+	{
 		return (0);
+	}
 	return (1);
 }
 
@@ -50,10 +52,8 @@ static void		write_ant(t_all *all)
 	{
 		if (validate_ants(&all->map, tmp) == 0)
 		{
+			free(tmp);
 			ft_putstr("ERROR\n");
-			// ft_putstr("WRONG NUMBER OF ANTS\n");
-			// free(*map);
-			// free(*file);
 			exit(0);
 		}
 		else

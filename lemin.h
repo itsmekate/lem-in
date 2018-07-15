@@ -88,4 +88,7 @@ int					write_links(t_all *all, char **split, char *tmp, int f);
 int					write_first_room(t_all *all, char **split, char sf, char *tmp);
 int					write_rooms(t_all *all, char **split, char sf, char *tmp);
 int					more_room_check(char **split, t_room head);
+void				free_file(t_file *file);
+void				free_map(t_l *map);
+void				free_rooms(t_room *rooms);
 #endif

@@ -64,8 +64,6 @@ t_file	*ft_find_path(t_l *map, t_room *head)
 	paths = NULL;
 	while (rc.row != map->start)
 	{
-		// ft_putstr("--");
-		// ft_putnbr(rc.row);
 		rc.col = 0;
 		rc.row = rc.min_col;
 		if (paths == NULL)

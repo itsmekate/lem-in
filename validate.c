@@ -19,13 +19,16 @@ int		validate_links(char **split/*, t_file **file, t_room **rooms, t_l **map*/)
 {
 	if (ft_strchr(split[0], ' ') || ft_strchr(split[1], ' '))
 	{
+		// free_split(split);
 		/*FREE MAP, FILE, ROOMS*/
 		return (0);
 	}
 	if (array_size(split) != 2)
 	{
+		// free_split(split);
 		/*FREE MAP, FILE, ROOMS*/
 		return (0);
 	}
+	// free_split(split);
 	return (1);
 }

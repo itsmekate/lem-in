@@ -29,6 +29,7 @@ void	add_to_file(t_file **file, char *str)
 
 char	set_sf(char sf, char *tmp)
 {
+	sf = 0;
 	(ft_strcmp(tmp, "##start") == 0) ? sf = 's' : 0;
 	(ft_strcmp(tmp, "##end") == 0) ? sf = 'f' : 0;
 	return (sf);

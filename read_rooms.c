@@ -28,11 +28,13 @@ int		check_sf_and_names(t_room **rooms, char sf, char **split)
 			(temp->start == 1 && sf == 's')
 			|| (temp->finish == 1 && sf == 'f'))
 		{
+			// free_split(split);
 			// ft_putendl("NAME ALREADY EXCISTS");
 			return (0);
 		}
 		temp = temp->next;
 	}
+	// free_split(split);
 	return (1);
 }
 
