@@ -28,13 +28,11 @@ int		check_sf_and_names(t_room **rooms, char sf, char **split)
 			(temp->start == 1 && sf == 's')
 			|| (temp->finish == 1 && sf == 'f'))
 		{
-			// free_split(split);
 			// ft_putendl("NAME ALREADY EXCISTS");
 			return (0);
 		}
 		temp = temp->next;
 	}
-	// free_split(split);
 	return (1);
 }
 
@@ -58,7 +56,6 @@ int		add_to_rooms(char **split, char sf, t_room **rooms)
 	tmp = (*rooms);
 	if (!check_max_int(split) || !check_room(split))
 	{
-		// free_split(split);
 		return (0);
 	}
 	while (tmp->next)
@@ -75,7 +72,6 @@ int		add_to_rooms(char **split, char sf, t_room **rooms)
 	sf == 's' ? tmp->next->start = 1 : 0;
 	sf == 'f' ? tmp->next->finish = 1 : 0;
 	tmp->next->next = NULL;
-	// free_split(split);
 	return (1);
 }
 
@@ -84,7 +80,6 @@ int		add_first_room(char **split, char sf, t_room **rooms)
 	if (!check_max_int(split) || !check_room(split))
 	{
 		// ft_putendl("ERROR3");
-		// free_split(split);
 		return (0);
 	}
 	(*rooms) = (t_room*)malloc(sizeof(t_room));
@@ -97,6 +92,5 @@ int		add_first_room(char **split, char sf, t_room **rooms)
 	sf == 's' ? (*rooms)->start = 1 : 0;
 	sf == 'f' ? (*rooms)->finish = 1 : 0;
 	(*rooms)->next = NULL;
-	// free_split(split);
 	return (1);
 }

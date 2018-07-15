@@ -64,12 +64,10 @@ int		add_to_links(t_l *map, t_room *rooms, char **split)
 	row = 0;
 	if (array_size(split) != 2)
 	{
-		// free_split(split);
 		return (0);
 	}
 	if (more_room_check(split, *rooms) == 0)
 	{
-		// free_split(split);
 		return (0);
 	}
 	while (row < map->rooms)
@@ -86,6 +84,5 @@ int		add_to_links(t_l *map, t_room *rooms, char **split)
 		}
 		row++;
 	}
-	// free_split(split);
 	return (1);
 }

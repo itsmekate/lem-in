@@ -3,13 +3,12 @@ TO DO:
 -negative coordinates handling || have no idea how to fix so far
 -norm
 -clean leaks
--stop reading after non valid string || kinda done but don't know if it's a correct form
 -EXIT STRING:
-	-main.38
-	-main.87
+	-main.38 || NO LEAKS
+	-main.87 || NO LEAKS
 	-main.113
-	-read_ants.57
-	-write.50
+	-read_ants.57 || NO LEAKS
+	-write.50 || NO LEAKS
 	-write.78
 	-write.96
 

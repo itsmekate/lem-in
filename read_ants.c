@@ -53,6 +53,7 @@ static void		write_ant(t_all *all)
 		if (validate_ants(&all->map, tmp) == 0)
 		{
 			free(tmp);
+			free(all->map);
 			ft_putstr("ERROR\n");
 			exit(0);
 		}
