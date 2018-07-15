@@ -16,7 +16,7 @@ void	free_map(t_l *map)
 	int i;
 
 	i = 0;
-	while (map->matrix[i])
+	while (i < map->rooms)
 	{
 		free(map->matrix[i]);
 		i++;

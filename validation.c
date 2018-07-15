@@ -62,6 +62,9 @@ int	check_room(char **holder)
 		return (0);
 	}
 	if (!ft_check_num(holder[1]) || !ft_check_num(holder[2]))
-		return (0);
+	{
+		ft_putendl("ERROR");
+		exit (0);
+	}
 	return (1);
 }

@@ -66,7 +66,7 @@ int		add_to_links(t_l *map, t_room *rooms, char **split)
 	{
 		return (0);
 	}
-	if (more_room_check(split, *rooms) == 0)
+	if (more_room_check(split, rooms) == 0)
 	{
 		return (0);
 	}

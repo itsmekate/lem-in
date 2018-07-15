@@ -78,10 +78,7 @@ int		add_to_rooms(char **split, char sf, t_room **rooms)
 int		add_first_room(char **split, char sf, t_room **rooms)
 {
 	if (!check_max_int(split) || !check_room(split))
-	{
-		// ft_putendl("ERROR3");
 		return (0);
-	}
 	(*rooms) = (t_room*)malloc(sizeof(t_room));
 	(*rooms)->start = 0;
 	(*rooms)->finish = 0;

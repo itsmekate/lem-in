@@ -26,9 +26,9 @@ int		check_dash(char *str)
 	return (count);
 }
 
-int		more_room_check(char **split, t_room head)
+int		more_room_check(char **split, t_room *head)
 {
-	if (!is_room(split[0], &head) || !is_room(split[1], &head))
+	if (!is_room(split[0], head) || !is_room(split[1], head))
 	{
 		return (0);
 	}
@@ -58,6 +58,7 @@ int		write_links(t_all *all, char **split, char *tmp, int f)
 	split = ft_strsplit(tmp, '-');
 	if (!validate_links(split))
 	{
+		free_split(split);
 		return (0);	
 	}
 	add_to_file(&all->file, tmp);
@@ -68,13 +69,10 @@ int		write_links(t_all *all, char **split, char *tmp, int f)
 	}
 	if (!(add_to_links(all->map, all->rooms, split)))
 	{
-		// free(all->map);
-		// free_file(all->file);
-		// free_rooms(all->rooms);
 		ft_putendl("ERROR");
-		// system("leaks lem-in");
 		exit(0);
 	}
+	free_split(split);
 	return (1);
 }
 
@@ -87,9 +85,7 @@ int		write_rooms(t_all *all, char **split, char sf, char *tmp)
 	add_to_file(&all->file, tmp);
 	if(!add_to_rooms(split, sf, &all->rooms))
 	{
-		/*FREE MAP, FILE, ROOMS*/
 		ft_putendl("ERROR");
-		// ft_putendl("EXIT2");
 		exit(0);
 	}
 	return (1);

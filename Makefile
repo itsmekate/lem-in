@@ -20,7 +20,7 @@ basic_functions.c validate.c write.c free.c
 LIB = -L libft/ -lft
 OBJ = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 # -fsanitize=address -g
 
