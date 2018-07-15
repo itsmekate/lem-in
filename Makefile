@@ -22,8 +22,6 @@ OBJ = $(SRCS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror
 
-# -fsanitize=address -g
-
 all: $(NAME)
 
 libft: 

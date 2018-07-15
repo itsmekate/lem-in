@@ -78,17 +78,21 @@ t_file				*ft_find_path(t_l *map, t_room *head);
 void				print_out(t_l *map, t_file *res);
 int					ft_room_id(t_room *room, char *str);
 char				*ft_room_name(t_room *room, int id);
-int					validate_links(char **split/*t_all *all*/);
+int					validate_links(char **split);
 int					validate_rooms(char **split, t_room **rooms, char sf);
 void				print_lemin(t_file *file);
 void				add_to_file(t_file **file, char *str);
 char				set_sf(char sf, char *tmp);
 void				set_all(t_all **all);
-int					write_links(t_all *all, char **split, char *tmp, int f);
-int					write_first_room(t_all *all, char **split, char sf, char *tmp);
+int					write_links(t_all *all, char *tmp, int f);
+int					write_first_room(t_all *all, char **split,
+	char sf, char *tmp);
 int					write_rooms(t_all *all, char **split, char sf, char *tmp);
 int					more_room_check(char **split, t_room *head);
 void				free_file(t_file *file);
 void				free_map(t_l *map);
 void				free_rooms(t_room *rooms);
+int					is_room(char *name, t_room *head);
+int					check_dash(char *str);
+void				free_all(t_all *all, t_file *res);
 #endif

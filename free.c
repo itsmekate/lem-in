@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kprasol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/15 21:52:37 by kprasol           #+#    #+#             */
+/*   Updated: 2018/07/15 21:52:38 by kprasol          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 void	free_file(t_file *file)
 {
-	while(file)
+	while (file)
 	{
 		free(file->str);
 		free(file);
@@ -34,4 +46,15 @@ void	free_rooms(t_room *rooms)
 		rooms = rooms->next;
 	}
 	free(rooms);
+}
+
+void	free_all(t_all *all, t_file *res)
+{
+	print_lemin(all->file);
+	print_out(all->map, res);
+	free_map(all->map);
+	free_file(all->file);
+	free_rooms(all->rooms);
+	free_file(res);
+	free(all);
 }

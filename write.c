@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kprasol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/15 21:55:26 by kprasol           #+#    #+#             */
+/*   Updated: 2018/07/15 21:55:27 by kprasol          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-#include <stdio.h>
 int		is_room(char *name, t_room *head)
 {
 	while (head)
@@ -10,29 +21,6 @@ int		is_room(char *name, t_room *head)
 		head = head->next;
 	}
 	return (0);
-}
-
-int		check_dash(char *str)
-{
-	int count;
-
-	count = 0;
-	while(*str)
-	{
-		if(*str == '-')
-			count++;
-		str++;
-	}
-	return (count);
-}
-
-int		more_room_check(char **split, t_room *head)
-{
-	if (!is_room(split[0], head) || !is_room(split[1], head))
-	{
-		return (0);
-	}
-	return (1);
 }
 
 int		write_first_room(t_all *all, char **split, char sf, char *tmp)
@@ -49,8 +37,10 @@ int		write_first_room(t_all *all, char **split, char sf, char *tmp)
 	return (1);
 }
 
-int		write_links(t_all *all, char **split, char *tmp, int f)
+int		write_links(t_all *all, char *tmp, int f)
 {
+	char **split;
+
 	if (check_dash(tmp) != 1)
 	{
 		return (0);
@@ -59,7 +49,7 @@ int		write_links(t_all *all, char **split, char *tmp, int f)
 	if (!validate_links(split))
 	{
 		free_split(split);
-		return (0);	
+		return (0);
 	}
 	add_to_file(&all->file, tmp);
 	if (f == 0)
@@ -79,11 +69,9 @@ int		write_links(t_all *all, char **split, char *tmp, int f)
 int		write_rooms(t_all *all, char **split, char sf, char *tmp)
 {
 	if (!validate_rooms(split, &all->rooms, sf))
-	{
 		return (0);
-	}
 	add_to_file(&all->file, tmp);
-	if(!add_to_rooms(split, sf, &all->rooms))
+	if (!add_to_rooms(split, sf, &all->rooms))
 	{
 		ft_putendl("ERROR");
 		exit(0);

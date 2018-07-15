@@ -28,10 +28,7 @@ int	read_start_and_end(t_room **rooms, t_l **map)
 		tmp = tmp->next;
 	}
 	if ((*map)->start == -1 || (*map)->end == -1)
-	{
-		// ft_putendl("WRONG NUM OF CMD");
 		return (0);
-	}
 	return (1);
 }
 
@@ -46,4 +43,27 @@ int	ft_count_rooms(t_room *room)
 		room = room->next;
 	}
 	return (count);
+}
+
+int	check_dash(char *str)
+{
+	int count;
+
+	count = 0;
+	while (*str)
+	{
+		if (*str == '-')
+			count++;
+		str++;
+	}
+	return (count);
+}
+
+int	more_room_check(char **split, t_room *head)
+{
+	if (!is_room(split[0], head) || !is_room(split[1], head))
+	{
+		return (0);
+	}
+	return (1);
 }
